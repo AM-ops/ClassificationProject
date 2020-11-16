@@ -1,4 +1,4 @@
 bootstrap4
-Django
+django
 django-crispy-forms
 djangorestframework

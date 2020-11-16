@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% block titleblock %}
+  Oops!
+{% endblock %}
+{%block bodyblock%}
+  <div class="container">
+    <div class="jumbotron d-flex justify-content-center">
+      <h2>Oops!</h2>
+        <p>Seems like the page you requested does not exist!</p>
+      <a class="btn btn-outline-success" href="{% url 'home' %}">Go back Home</a>
+    </div>
+  </div>
+{%endblock%}
