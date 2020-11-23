@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% block titleblock%}Confirm Delete{% endblock %}
+{% block bodyblock %}
+<div class="container m-5">
+    <h3>Confirm Delete</h3>
+    <form class="form" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <h4>Would you like to delete {{ object.file_name }} ?</h4>
+      <input type="submit" name="" value="Yes" class="btn btn-danger">
+      <a href="{% url 'api:class_list' %}" class="btn btn-outline-dark">Cancel</a>
+    </form>
+</div>
+{% endblock%}

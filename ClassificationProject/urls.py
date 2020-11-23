@@ -18,6 +18,8 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth import urls as u
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,3 +30,4 @@ urlpatterns = [
     url(r'^thanks/$',views.ThanksPage.as_view(),name='thanks'),
      path('', include('api.urls')),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

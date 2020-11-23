@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% block titleblock%}Create{% endblock %}
+{% block headblock %}
+{% endblock %}
+{% block bodyblock %}
+<form method="post" class="form m-5 m-2">
+  {% csrf_token %}
+    {{ form | crispy}}
+    <input type="submit" value="Change" class="btn btn-success">
+</form>
+{% endblock %}

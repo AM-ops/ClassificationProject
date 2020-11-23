@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% block titleblock%}List{% endblock %}
+{% block headblock %}
+{% endblock %}
+{% block bodyblock %}
+<div class="container m-2 p-2">
+    <div class="container m-3">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">File Name</th>
+              <th scope="col">File Description</th>
+              <th scope="col">File Type</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in list %}
+            <tr>
+              <td>{{item.file_name}}</td>
+              <td>{{item.file_description}}</td>
+              <td>{{item.file_type}}</td>
+              <td><a href="{% url 'home' %}" class="btn btn-primary m-1">Classify Data</a>
+                  <a href="{% url 'api:class_detail' item.pk %}" class="btn btn-primary m-1">View Classified Data</a>
+                <a href="{% url 'api:class_delete' item.pk %}" class="btn btn-danger m-1">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

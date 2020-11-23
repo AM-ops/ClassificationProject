@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% block titleblock%}Details{% endblock %}
+{% block headblock %}
+{% endblock %}
+{% block bodyblock %}
+<div class="container m-2 p-2">
+    <h2>Classified Metadata</h2>
+</div>
+<div class="container m-2 p-2">
+    <div class="container m-3">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in queryset %}
+            <tr>
+              <td>{{item.item_name}}</td>
+              <td><a href="{% url 'api:item_edit' item.pk %}" class="btn btn-primary m-1">Edit</a>
+                <a href="{% url 'api:item_delete' item.pk %}" class="btn btn-danger m-1">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

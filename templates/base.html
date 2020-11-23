@@ -17,6 +17,8 @@
       </div>
         <ul class="nav navbar-nav ml-auto">
           {% if user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{% url 'api:create_class' %}">Classify</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'api:class_list' %}">File List</a></li>
             <li><a class="nav-item nav-link disabled">Welcome,  {{user.username}}</a></li>
             <li><a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
           {% else %}
