@@ -6,13 +6,13 @@ Django\
 Django Rest Framework\
 django-crispy-forms\
 Pandas\
-Bootstrap\
+Bootstrap
 
 ## File types supported
 .csv\
 .tsv\
 .xlsx\
-.txt\
+.txt
 
 ## Hosted at:
 https://classificationproject.pythonanywhere.com
