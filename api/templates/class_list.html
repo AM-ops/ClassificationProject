@@ -21,7 +21,7 @@
               <td>{{item.file_name}}</td>
               <td>{{item.file_description}}</td>
               <td>{{item.file_type}}</td>
-              <td><a href="{% url 'home' %}" class="btn btn-primary m-1">Classify Data</a>
+              <td><a href="{% url 'api:class_classify' item.pk %}" class="btn btn-primary m-1">Classify Data</a>
                   <a href="{% url 'api:class_detail' item.pk %}" class="btn btn-primary m-1">View Classified Data</a>
                 <a href="{% url 'api:class_delete' item.pk %}" class="btn btn-danger m-1">Delete</a></td>
             </tr>

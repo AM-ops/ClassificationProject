@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'item/(?P<pk>\d+)/$',views.ClassificationListDetailView.as_view(), name='class_detail'),
     url(r'item/edit/(?P<pk>\d+)/$',views.ItemUpdateView.as_view(), name='item_edit'),
     url(r'item/del/(?P<pk>\d+)/$',views.ItemDeleteView.as_view(), name='item_delete'),
+    url(r'classify/(?P<pk>\d+)/$',views.ClassifyPage.as_view(), name='class_classify'),
 
     #path('snippets/<int:pk>/', views.classification_detail),
 ]

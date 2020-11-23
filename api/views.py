@@ -19,6 +19,8 @@ from .forms import ModelFormWithFileField, UpdateModelForm
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.files.storage import FileSystemStorage
+import pandas as pd
+import xlrd
 
 #from django.db.models import Count
 
@@ -229,23 +231,24 @@ class ItemUpdateView(LoginRequiredMixin,UpdateView):
     success_url = reverse_lazy('api:class_list')
     context_object_name = 'list'
 
-    # def get_object(self, queryset=None):
-    #     return get_object_or_404(self.model, pk=self.request..pk)
+keywords = [('ID','ID Number'),('Name','Name'),('Surname','Surname'),('Initial','Initials'),('Title','Title'),('Fullname','Fullname'),('Gender','Gender'),('Mari','Marital Status'),('Maiden','Maiden Name'),('Race','Race/Ethnicity'),('DoB','Date of Birth'),('Age','Age'),('Language','Home Language'),('Nation','Nationality'),('Tax','Tax Number'),('Address','Postal/Residential Address'),('Zip','Zip Code'),('Tel','Telephone Number'),('Mobile','Mobile Number'),('mail','E-mail Address'),('Employ','Employment History'),('Qual','Qualifications'),('Passport','Passport Number'),('Bank','Banking Details')]
 
-    # def get(self, request, *args, **kwargs):
-    #     self.referer = request.META.get("HTTP_REFERER", "")
-    #     request.session["login_referer"] = self.referer
-    #     return super().get(request, *args, **kwargs)
+class ClassifyPage(LoginRequiredMixin,TemplateView):
+    template_name = 'done.html'
 
-    # def post(self, request, *args, **kwargs):
-    #     self.referer = request.session.get("login_referer", "")
-    #     return super().post(request, *args, **kwargs)
-
-    # def form_valid(self, form):
-    #     pw = form.cleaned_data["password1"]
-    #     if pw != "":
-    #         self.object.set_password(pw)
-    #     self.object.save()
-
-    #     messages.info(self.request, _("Account info saved!"))
-
+    def get_context_data(self, *args, **kwargs):
+        context = super(ClassifyPage, self).get_context_data(**kwargs)
+        currID = self.kwargs['pk']
+        obj = Classification.objects.get(pk=currID)
+        filetype = obj.file_type.lower()
+        if ((filetype == 'csv') or (filetype == 'txt')):
+            myfile = pd.read_csv(obj.document)
+        if (filetype == 'xlsx'):
+            myfile = pd.read_excel(obj.document)
+        if (filetype == 'tsv'):
+            myfile = pd.read_csv(obj.document, sep='\t')
+        for x,y in keywords:
+            out = myfile.apply(lambda row: row.astype(str).str.contains('x'.lower(),case=False).any(), axis=1).any()
+            if out:
+                ClassificationItem.objects.create(item_name=y,item_type=obj)
+        return context
