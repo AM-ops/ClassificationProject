@@ -10,6 +10,11 @@ django-crispy-forms\
 Pandas\
 Bootstrap
 
+### Languages
+Python\
+HTML\
+CSS
+
 ## File types supported
 .csv\
 .tsv\
